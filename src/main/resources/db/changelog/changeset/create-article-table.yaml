@@ -1,0 +1,42 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: Andrew
+      changes:
+        - createTable:
+            tableName: article
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: article_title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: article_text
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: author_id
+
+  - changeSet:
+      id: addForeignKeyConstraint
+      author: Andrew
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: author_id
+            baseTableName: article
+            constraintName: fk_author_id
+            referencedColumnNames: id
+            referencedTableName: user
